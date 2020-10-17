@@ -261,7 +261,7 @@ class StochasticPolicy(Policy):
         log_probabilities = log_probabilities.fmap(function=function, zip_values=self.actions_spec)
         log_probabilities = tf.concat(values=tuple(log_probabilities.values()), axis=1)
 
-        return tf.math.reduce_sum(input_tensor=log_probabilities, axis=1)
+        return tf.math.reduce_mean(input_tensor=log_probabilities, axis=1)
 
     @tf_function(num_args=4)
     def entropy(self, *, states, horizons, internals, auxiliaries):
