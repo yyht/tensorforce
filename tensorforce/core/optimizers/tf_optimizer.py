@@ -73,7 +73,7 @@ class TFOptimizer(Optimizer):
     """
 
     def __init__(
-        self, *, optimizer, learning_rate, gradient_norm_clipping=1.0, name=None,
+        self, *, optimizer, learning_rate, gradient_norm_clipping=None, name=None,
         arguments_spec=None, **kwargs
     ):
         super().__init__(name=name, arguments_spec=arguments_spec)
