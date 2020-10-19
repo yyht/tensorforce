@@ -16,8 +16,8 @@
 import tensorflow as tf
 
 from tensorforce import TensorforceError, util
-from tensorforce.core import layer_modules, SignatureDict, TensorDict, TensorSpec, TensorsSpec, \
-    tf_function, tf_util
+from tensorforce.core import layer_modules, TensorDict, TensorSpec, TensorsSpec, tf_function, \
+    tf_util
 from tensorforce.core.distributions import Distribution
 
 
@@ -121,9 +121,9 @@ class Categorical(Distribution):
         probabilities = tf.nn.softmax(logits=action_values, axis=-1)
 
         # "Normalized" logits
-        epsilon = tf_util.constant(value=util.epsilon, dtype='float')
-        logits = tf.math.log(x=tf.maximum(x=probabilities, y=epsilon))
-        # logits = tf.nn.log_softmax(logits=action_values, axis=-1)
+        # epsilon = tf_util.constant(value=util.epsilon, dtype='float')
+        # logits = tf.math.log(x=tf.maximum(x=probabilities, y=epsilon))
+        logits = tf.nn.log_softmax(logits=action_values, axis=-1)
         # logits = action_values - tf.expand_dims(input=state_value, axis=-1)
 
         return TensorDict(
